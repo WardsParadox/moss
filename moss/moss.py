@@ -9,7 +9,7 @@
 # Authors Vince Mascoli (@paperfixie) and Zack McCauley (@wardsparadox)
 #
 #
-
+import os
 from plistlib import writePlist
 from uuid import uuid4
 profileuuid = str(uuid4())
@@ -71,10 +71,8 @@ MACaddress = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
 # Dictionaries for public functions
 
 _scriptItem = {}
-_scriptItem["key"] = "functionIdentifier"
-_scriptItem["string"] = "public.script.item"
-_scriptItem["key"] = "settings"
-_scriptItem[script_dict] = {
-    script_dict["key"] = "script"
-    script_dict["string"] = #create script list variable 
-}
+_script_dict = {}
+_script_settings = {}
+_scriptItem["functionIdentifier"] = "public.script.item"
+_scriptItem["settings"] = _script_dict
+_script_dict["script"] = _script_settings
