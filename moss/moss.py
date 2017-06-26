@@ -60,13 +60,13 @@ writePlist(_profile, filename)
 # Dictionary of shortnamed variables for script filenames
 
 script_list = {}
-script_list[model_info] = "com.github.ygini.hello-it.computerdetails.modelinfo.sh"
-script_list[mac_os_version] = "com.github.ygini.hello-it.computerdetails.macOSversion.sh"
-script_list[ram_info] = "com.github.ygini.hello-it.computerdetails.raminfo.sh"
-script_list[smart_status] = "com.github.ygini.hello-it.computerdetails.smartstatus.sh"
-script_list[storage_space] = "com.github.ygini.hello-it.computerdetails.storagespace.sh"
-script_list[email_computer_info] = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
-script_list[mac_address] = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
+script_list["model_info"] = "com.github.ygini.hello-it.computerdetails.modelinfo.sh"
+script_list["mac_os_version"] = "com.github.ygini.hello-it.computerdetails.macOSversion.sh"
+script_list["ram_info"] = "com.github.ygini.hello-it.computerdetails.raminfo.sh"
+script_list["smart_status"] = "com.github.ygini.hello-it.computerdetails.smartstatus.sh"
+script_list["storage_space"] = "com.github.ygini.hello-it.computerdetails.storagespace.sh"
+script_list["email_computer_info"] = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
+script_list["mac_address"] = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
 
 # Dictionaries for public functions
 
