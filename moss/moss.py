@@ -56,3 +56,25 @@ _profile["PayloadContent"] = [_payload]
 
 filename = "test.mobileconfig"
 writePlist(_profile, filename)
+
+#Short name variables for script filenames
+#Create list that contains all these variables
+
+modelInfo = "com.github.ygini.hello-it.computerdetails.modelinfo.sh"
+macOSversion = "com.github.ygini.hello-it.computerdetails.macOSversion.sh"
+RAMinfo = "com.github.ygini.hello-it.computerdetails.raminfo.sh"
+smartStatus = "com.github.ygini.hello-it.computerdetails.smartstatus.sh"
+storageSpace = "com.github.ygini.hello-it.computerdetails.storagespace.sh"
+emailComputerInfo = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
+MACaddress = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
+
+# Dictionaries for public functions
+
+_scriptItem = {}
+_scriptItem["key"] = "functionIdentifier"
+_scriptItem["string"] = "public.script.item"
+_scriptItem["key"] = "settings"
+_scriptItem[script_dict] = {
+    script_dict["key"] = "script"
+    script_dict["string"] = #create script list variable 
+}
