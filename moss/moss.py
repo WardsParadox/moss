@@ -57,22 +57,22 @@ _profile["PayloadContent"] = [_payload]
 filename = "test.mobileconfig"
 writePlist(_profile, filename)
 
-#Short name variables for script filenames
-#Create list that contains all these variables
+# Dictionary of shortnamed variables for script filenames
 
-modelInfo = "com.github.ygini.hello-it.computerdetails.modelinfo.sh"
-macOSversion = "com.github.ygini.hello-it.computerdetails.macOSversion.sh"
-RAMinfo = "com.github.ygini.hello-it.computerdetails.raminfo.sh"
-smartStatus = "com.github.ygini.hello-it.computerdetails.smartstatus.sh"
-storageSpace = "com.github.ygini.hello-it.computerdetails.storagespace.sh"
-emailComputerInfo = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
-MACaddress = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
+script_list = {}
+script_list[model_info] = "com.github.ygini.hello-it.computerdetails.modelinfo.sh"
+script_list[mac_os_version] = "com.github.ygini.hello-it.computerdetails.macOSversion.sh"
+script_list[ram_info] = "com.github.ygini.hello-it.computerdetails.raminfo.sh"
+script_list[smart_status] = "com.github.ygini.hello-it.computerdetails.smartstatus.sh"
+script_list[storage_space] = "com.github.ygini.hello-it.computerdetails.storagespace.sh"
+script_list[email_computer_info] = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
+script_list[mac_address] = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
 
 # Dictionaries for public functions
 
-_scriptItem = {}
+_script_item = {}
 _script_dict = {}
 _script_settings = {}
-_scriptItem["functionIdentifier"] = "public.script.item"
-_scriptItem["settings"] = _script_dict
+_script_item["functionIdentifier"] = "public.script.item"
+_script_item["settings"] = _script_dict
 _script_dict["script"] = _script_settings
