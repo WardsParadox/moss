@@ -9,7 +9,6 @@
 # Authors Vince Mascoli (@paperfixie) and Zack McCauley (@wardsparadox)
 #
 #
-import os
 from plistlib import writePlist
 from uuid import uuid4
 profileuuid = str(uuid4())
@@ -68,17 +67,36 @@ script_list["storage_space"] = "com.github.ygini.hello-it.computerdetails.storag
 script_list["email_computer_info"] = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
 script_list["mac_address"] = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
 
-script_frequency ={}
-script_frequency["run"] = "periodic_run"
-script_frequency["time_int"] = int()
+
 
 # Dictionaries for public functions
+# public.script.item
 
 _script_item = {}
 _script_dict = {}
 _script_settings = {}
+_script_freq = {}
 _script_item["functionIdentifier"] = "public.script.item"
 _script_item["settings"] = _script_dict
 _script_dict["script"] = _script_settings
 _script_settings["script_name"] = script_list
-_script_settings["script_freq"] = script_frequency
+_script_settings["title"] = "$script_list"
+_script_settings["script_freq"] = _script_freq
+_script_freq["run"] = "periodic_run"
+_script_freq["time_int"] = int()
+
+# public.submenu
+
+_public_submenu = {}
+_content = {}
+_public_submenu["functionIdentifier"] = "public.submenu"
+_public_submenu["content"] = _content
+
+# public.open.resource
+
+_public_open_resource = {}
+_settings = {}
+_public_open_resource["functionIdentifier"] = "public.open.resource"
+_public_open_resource["settings"] = _settings
+_settings["URL"] = ""
+_settings["title"] = ""
