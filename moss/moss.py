@@ -3,12 +3,14 @@
 #
 #
 # Moss is designed to
-# to quickly create mobileconfig files from a JSON file
-# created by Roy the GUI app.
+# to quickly create mobileconfig files for use
+# with the Hello IT app by Yoann Gini (@ygini) from a JSON file
+# created by the Roy GUI app
 #
 # Authors Vince Mascoli (@paperfixie) and Zack McCauley (@wardsparadox)
 #
 #
+
 from plistlib import writePlist
 from uuid import uuid4
 profileuuid = str(uuid4())
@@ -95,8 +97,39 @@ _public_submenu["content"] = _content
 # public.open.resource
 
 _public_open_resource = {}
-_settings = {}
+_public_open_resource_settings = {}
 _public_open_resource["functionIdentifier"] = "public.open.resource"
-_public_open_resource["settings"] = _settings
-_settings["URL"] = ""
-_settings["title"] = ""
+_public_open_resource["settings"] = _public_open_resource_settings
+_public_open_resource_settings["URL"] = ""
+_public_open_resource_settings["title"] = ""
+
+# public.separator
+
+_public_separator = {}
+_public_separator["functionIdentifier"] = "public.separator"
+
+# public.quit
+
+_public_quit = {}
+_public_quit["functionIdentifier"] = "public.quit"
+
+# public.test.http
+
+_public_test_http = {}
+_public_test_http_settings = {}
+_public_test_http["functionIdentifier"] = "public.test.http"
+_public_test_http["settings"] = _public_test_http_settings
+_public_test_http_settings["URL"] = "https://raw.githubusercontent.com/ygini/Hello-IT/master/staticfiles/internet_test.txt"
+_public_test_http_settings["imageBaseName"] = "network"
+_public_test_http_settings["mode"] = "md5"
+_public_test_http_settings["originalString"] = "ccf41dc8262810b99142b5627d27c25e"
+_public_test_http_settings["repeat"] = 60
+_public_test_http_settings["title"] = "Internet"
+
+# public.title
+
+_public_title = {}
+_public_title_settings = {}
+_public_title["functionIdentifier"] = "public.title"
+_public_title["settings"] = _public_title_settings
+_public_title_settings["title"] = ""
