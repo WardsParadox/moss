@@ -68,6 +68,10 @@ script_list["storage_space"] = "com.github.ygini.hello-it.computerdetails.storag
 script_list["email_computer_info"] = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
 script_list["mac_address"] = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
 
+script_frequency ={}
+script_frequency["run"] = "periodic_run"
+script_frequency["time_int"] = int()
+
 # Dictionaries for public functions
 
 _script_item = {}
@@ -76,3 +80,5 @@ _script_settings = {}
 _script_item["functionIdentifier"] = "public.script.item"
 _script_item["settings"] = _script_dict
 _script_dict["script"] = _script_settings
+_script_settings["script_name"] = script_list
+_script_settings["script_freq"] = script_frequency
