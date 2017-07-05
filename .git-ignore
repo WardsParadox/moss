@@ -1,0 +1,3 @@
+*.mobileconfig
+*.pyc
+*.DS_*

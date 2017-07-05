@@ -10,23 +10,25 @@
 # Authors Vince Mascoli (@paperfixie) and Zack McCauley (@wardsparadox)
 #
 #
-
+import pprint
 from plistlib import writePlist
 from uuid import uuid4
 profileuuid = str(uuid4())
 payloaduuid = str(uuid4())
 
 
+userisdone = False
+
 # Actual Content (ridiculous number of nested dicts)
 
-_content = {}
+_content = []
 
 # MCX Content
 _payloadcontent = {}
 _forcedcontent = []
 _mcxcontent = {}
 _contentarray = {}
-_contentarray["content"] = [_content]
+_contentarray["content"] = _content
 _mcxcontent["mcx_preference_settings"] = _contentarray
 _forced = {}
 _forcedcontent.append(_mcxcontent)
@@ -54,9 +56,6 @@ _profile["PayloadType"] = "Configuration"
 _profile["PayloadUUID"] = profileuuid
 _profile["PayloadVersion"] = 1
 _profile["PayloadContent"] = [_payload]
-
-filename = "test.mobileconfig"
-writePlist(_profile, filename)
 
 # Dictionary of shortnamed variables for script filenames
 
@@ -90,9 +89,11 @@ _script_freq["time_int"] = int()
 # public.submenu
 
 _public_submenu = {}
-_content = {}
+_submenu_settings = {}
+_submenu_settings["content"] = [] # Each list item is a dict
+_submenu_settings["title"] = ""
 _public_submenu["functionIdentifier"] = "public.submenu"
-_public_submenu["content"] = _content
+_public_submenu["settings"] = _submenu_settings
 
 # public.open.resource
 
@@ -127,9 +128,34 @@ _public_test_http_settings["repeat"] = 60
 _public_test_http_settings["title"] = "Internet"
 
 # public.title
+def createTitleItem():
+    titletext = raw_input("Enter the text for the Title Element:")
+    _public_title = {}
+    _public_title_settings = {}
+    _public_title_settings["title"] = titletext
+    _public_title["functionIdentifier"] = "public.title"
+    _public_title["settings"] = _public_title_settings
+    print "Added {0} Title to layout".format(_public_title["settings"]["title"])
+    print _content
+    _content.append(_public_title)
+    print _content
+#    oldcontent = _content
+#    print oldcontent
+#    newcontent = _public_title
+#    print newcontent
+#    merged = dict(oldcontent.items() + newcontent.items())
+#    print merged
+#    _content.update(merged)
+#    print _content
 
-_public_title = {}
-_public_title_settings = {}
-_public_title["functionIdentifier"] = "public.title"
-_public_title["settings"] = _public_title_settings
-_public_title_settings["title"] = ""
+while userisdone != True:
+    print "Current Layout:"
+    pprint.pprint(_content, indent=4)
+    answer = raw_input('Add more to the layout? [y/n] ')
+    if answer.lower().startswith('y'):
+        userisdone = False
+        createTitleItem()
+    else:
+        userisdone = True
+
+writePlist(_profile, "test.mobileconfig")
