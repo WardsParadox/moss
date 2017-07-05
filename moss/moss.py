@@ -88,12 +88,24 @@ _script_freq["time_int"] = int()
 
 # public.submenu
 
-_public_submenu = {}
-_submenu_settings = {}
-_submenu_settings["content"] = [] # Each list item is a dict
-_submenu_settings["title"] = ""
-_public_submenu["functionIdentifier"] = "public.submenu"
-_public_submenu["settings"] = _submenu_settings
+#def createSubmenuItem():
+#    titletext = raw_input("Enter the text for the Title Element:")
+#    _public_submenu = {}
+#    _submenu_settings = {}
+#    _submenu_settings["title"] = titletext
+#    _public_submenu["functionIdentifier"] = "public.submenu"
+#    _public_submenu["settings"] = _submenu_settings
+#    print "Added {0} Submenu Title to layout".format(_public_submenu["settings"]["title"])
+#    print _content
+#    _content.append(_public_submenu)
+#    print _content
+#oldcontent
+#_public_submenu = {}
+#_submenu_settings = {}
+#_submenu_settings["content"] = [] # Each list item is a dict
+#_submenu_settings["title"] = ""
+#_public_submenu["functionIdentifier"] = "public.submenu"
+#_public_submenu["settings"] = _submenu_settings
 
 # public.open.resource
 
@@ -137,6 +149,7 @@ def createTitleItem():
     _public_title["settings"] = _public_title_settings
     print "Added {0} Title to layout".format(_public_title["settings"]["title"])
     _content.append(_public_title)
+
 
 while userisdone != True:
     print "Current Layout:"
