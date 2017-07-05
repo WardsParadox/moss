@@ -136,17 +136,7 @@ def createTitleItem():
     _public_title["functionIdentifier"] = "public.title"
     _public_title["settings"] = _public_title_settings
     print "Added {0} Title to layout".format(_public_title["settings"]["title"])
-    print _content
     _content.append(_public_title)
-    print _content
-#    oldcontent = _content
-#    print oldcontent
-#    newcontent = _public_title
-#    print newcontent
-#    merged = dict(oldcontent.items() + newcontent.items())
-#    print merged
-#    _content.update(merged)
-#    print _content
 
 while userisdone != True:
     print "Current Layout:"
