@@ -141,16 +141,19 @@ _public_quit["functionIdentifier"] = "public.quit"
 
 # public.test.http
 
-_public_test_http = {}
-_public_test_http_settings = {}
-_public_test_http["functionIdentifier"] = "public.test.http"
-_public_test_http["settings"] = _public_test_http_settings
-_public_test_http_settings["URL"] = "https://raw.githubusercontent.com/ygini/Hello-IT/master/staticfiles/internet_test.txt"
-_public_test_http_settings["imageBaseName"] = "network"
-_public_test_http_settings["mode"] = "md5"
-_public_test_http_settings["originalString"] = "ccf41dc8262810b99142b5627d27c25e"
-_public_test_http_settings["repeat"] = 60
-_public_test_http_settings["title"] = "Internet"
+def createTestHTTP():
+    _public_test_http = {}
+    _public_test_http_settings = {}
+    _public_test_http["functionIdentifier"] = "public.test.http"
+    _public_test_http["settings"] = _public_test_http_settings
+    _public_test_http_settings["URL"] = "https://raw.githubusercontent.com/ygini/Hello-IT/master/staticfiles/internet_test.txt"
+    _public_test_http_settings["imageBaseName"] = "network"
+    _public_test_http_settings["mode"] = "md5"
+    _public_test_http_settings["originalString"] = "ccf41dc8262810b99142b5627d27c25e"
+    _public_test_http_settings["repeat"] = 60
+    _public_test_http_settings["title"] = "Internet"
+    print "Added Internet Test item"
+    _content.append(_public_test_http)
 
 # public.title
 def createTitleItem():
