@@ -1,29 +1,16 @@
 #!/usr/bin/python
-
-
 #
 #
-# Moss is designed to quickly create mobileconfig files
-# for use with the Hello IT app by Yoann Gini (@ygini)
+# Moss is designed to
+# to quickly create mobileconfig files for use
+# with the Hello IT app by Yoann Gini (@ygini) from a JSON file
+# created by the Roy GUI app
 #
-# Copyright (C) 2017  Vince Mascoli (@paperfixie) & Zack McCauley (@wardsparadox)
+# Authors Vince Mascoli (@paperfixie) and Zack McCauley (@wardsparadox)
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-
-
 import pprint
+#import argparse
 from plistlib import writePlist
 from uuid import uuid4
 profileuuid = str(uuid4())
@@ -70,16 +57,7 @@ _profile["PayloadUUID"] = profileuuid
 _profile["PayloadVersion"] = 1
 _profile["PayloadContent"] = [_payload]
 
-# Dictionary of shortnamed variables for script filenames
 
-script_list = {}
-script_list["model_info"] = "com.github.ygini.hello-it.computerdetails.modelinfo.sh"
-script_list["mac_os_version"] = "com.github.ygini.hello-it.computerdetails.macOSversion.sh"
-script_list["ram_info"] = "com.github.ygini.hello-it.computerdetails.raminfo.sh"
-script_list["smart_status"] = "com.github.ygini.hello-it.computerdetails.smartstatus.sh"
-script_list["storage_space"] = "com.github.ygini.hello-it.computerdetails.storagespace.sh"
-script_list["email_computer_info"] = "com.github.ygini.hello-it.computerdetails.emailcomputerinfo.sh"
-script_list["mac_address"] = "com.github.ygini.hello-it.networkdetails.macaddress.sh"
 
 
 
@@ -140,21 +118,23 @@ _public_quit = {}
 _public_quit["functionIdentifier"] = "public.quit"
 
 # public.test.http
+def createHttpTest():
+    _public_test_http = {}
+    _public_test_http_settings = {}
+    _public_test_http["settings"] = _public_test_http_settings
+    _public_test_http_settings["URL"] =     "https://raw.githubusercontent.com/ygini/Hello-IT/master/staticfiles/internet_test.txt"
+    _public_test_http_settings["imageBaseName"] = "network"
+    _public_test_http_settings["mode"] = "md5"
+    _public_test_http_settings["originalString"] =  "ccf41dc8262810b99142b5627d27c25e"
+    _public_test_http_settings["repeat"] = 60
+    _public_test_http_settings["title"] = "Internet"
+    _public_test_http["functionIdentifier"] = "public.test.http"
+    print _public_test_http
 
-_public_test_http = {}
-_public_test_http_settings = {}
-_public_test_http["functionIdentifier"] = "public.test.http"
-_public_test_http["settings"] = _public_test_http_settings
-_public_test_http_settings["URL"] = "https://raw.githubusercontent.com/ygini/Hello-IT/master/staticfiles/internet_test.txt"
-_public_test_http_settings["imageBaseName"] = "network"
-_public_test_http_settings["mode"] = "md5"
-_public_test_http_settings["originalString"] = "ccf41dc8262810b99142b5627d27c25e"
-_public_test_http_settings["repeat"] = 60
-_public_test_http_settings["title"] = "Internet"
 
 # public.title
 def createTitleItem():
-    titletext = raw_input("Enter the text for the Title Element:")
+    titletext = raw_input("Enter the text for the Title Element: ")
     _public_title = {}
     _public_title_settings = {}
     _public_title_settings["title"] = titletext
@@ -164,14 +144,21 @@ def createTitleItem():
     _content.append(_public_title)
 
 
+print """Would you prefer a Text based Title instead of an Icon?
+https://github.com/ygini/Hello-IT/wiki/Preferences#menu-bar-look"""
+answer = raw_input("[y/n] : ")
+if answer.lower().startswith('y'):
+    createTitleItem()
 while userisdone != True:
     print "Current Layout:"
     pprint.pprint(_content, indent=4)
-    answer = raw_input('Add more to the layout? [y/n] ')
+    answer = raw_input('Add more to the layout? [y/n] : ')
     if answer.lower().startswith('y'):
         userisdone = False
-        createTitleItem()
     else:
         userisdone = True
+answer = raw_input("Would you like a quit option for your layout? [y/n] : ")
+if answer.lower().startswith('y'):
+    _content.append(_public_quit)
 
 writePlist(_profile, "test.mobileconfig")
