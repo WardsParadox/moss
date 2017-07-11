@@ -71,11 +71,14 @@ _script_freq = {}
 _script_item["functionIdentifier"] = "public.script.item"
 _script_item["settings"] = _script_dict
 _script_dict["script"] = _script_settings
-_script_settings["script_name"] = script_list
+#_script_settings["script_name"] = script_list
 _script_settings["title"] = "$script_list"
 _script_settings["script_freq"] = _script_freq
 _script_freq["run"] = "periodic_run"
 _script_freq["time_int"] = int()
+
+def createScriptItem():
+    print "Feature in development..."
 
 # public.submenu
 
@@ -98,19 +101,26 @@ _script_freq["time_int"] = int()
 #_public_submenu["functionIdentifier"] = "public.submenu"
 #_public_submenu["settings"] = _submenu_settings
 
-# public.open.resource
+def createSubmenuItem():
+    print "Feature in development..."
 
-_public_open_resource = {}
-_public_open_resource_settings = {}
-_public_open_resource["functionIdentifier"] = "public.open.resource"
-_public_open_resource["settings"] = _public_open_resource_settings
-_public_open_resource_settings["URL"] = ""
-_public_open_resource_settings["title"] = ""
+# public.open.resource
+def createOpenResource():
+    _public_open_resource = {}
+    _public_open_resource_settings = {}
+    _public_open_resource["functionIdentifier"] = "public.open.resource"
+    _public_open_resource["settings"] = _public_open_resource_settings
+    _public_open_resource_settings["URL"] = raw_input("Enter URL: ")
+    _public_open_resource_settings["title"] = raw_input("Enter Title: ")
+    print "Added Open Resource Item"
+    _content.append(_public_open_resource)
 
 # public.separator
-
-_public_separator = {}
-_public_separator["functionIdentifier"] = "public.separator"
+def createSeparator():
+    _public_separator = {}
+    _public_separator["functionIdentifier"] = "public.separator"
+    print "Added Menu Separator"
+    _content.append(_public_separator)
 
 # public.quit
 
@@ -130,7 +140,7 @@ def createTestHTTP():
     _public_test_http_settings["title"] = "Internet"
     print "Added Internet Test item"
     _content.append(_public_test_http)
-    
+
 # public.title
 def createTitleItem():
     titletext = raw_input("Enter the text for the Title Element: ")
@@ -142,6 +152,28 @@ def createTitleItem():
     print "Added {0} Title to layout".format(_public_title["settings"]["title"])
     _content.append(_public_title)
 
+# layout function
+def createLayoutItem():
+    print """What layout item would you like to add?
+         [1] internet test
+         [2] open resource
+         [3] script item
+         [4] menu separator
+         [5] submenu
+         [6] title item"""
+    layout_input = raw_input("> ")
+    if layout_input == '1' or layout_input.lower().startswith('i'):
+        createTestHTTP()
+    elif layout_input == '2' or layout_input.lower().startswith('o'):
+        createOpenResource()
+    elif layout_input == '3' or layout_input.lower().startswith('s'):
+        createScriptItem()
+    elif layout_input == '4' or layout_input.lower().startswith('m'):
+        createSeparator()
+    elif layout_input == '5' or layout_input.lower().startswith('t'):
+        createTitleItem()
+    else:
+        createTitleItem()
 
 print """Would you prefer a Text based Title instead of an Icon?
 https://github.com/ygini/Hello-IT/wiki/Preferences#menu-bar-look"""
@@ -154,10 +186,13 @@ while userisdone != True:
     answer = raw_input('Add more to the layout? [y/n] : ')
     if answer.lower().startswith('y'):
         userisdone = False
+        createLayoutItem()
     else:
         userisdone = True
 answer = raw_input("Would you like a quit option for your layout? [y/n] : ")
 if answer.lower().startswith('y'):
+    print "Added Quit Function, Goodbye!"
     _content.append(_public_quit)
+
 
 writePlist(_profile, "test.mobileconfig")
