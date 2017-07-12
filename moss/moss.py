@@ -13,6 +13,8 @@ import pprint
 #import argparse
 from plistlib import writePlist
 from uuid import uuid4
+from definitions import script_list
+
 profileuuid = str(uuid4())
 payloaduuid = str(uuid4())
 
@@ -113,7 +115,7 @@ def createOpenResource():
     _public_open_resource_settings["URL"] = raw_input("Enter URL: ")
     _public_open_resource_settings["title"] = raw_input("Enter Title: ")
     print "Added Open Resource Item"
-    _content.append(_public_open_resource)
+    return _public_open_resource
 
 # public.separator
 def createSeparator():
@@ -139,7 +141,7 @@ def createTestHTTP():
     _public_test_http_settings["repeat"] = 60
     _public_test_http_settings["title"] = "Internet"
     print "Added Internet Test item"
-    _content.append(_public_test_http)
+    return _public_test_http
 
 # public.title
 def createTitleItem():

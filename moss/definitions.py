@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import pprint
 
 # Dictionary of shortnamed variables for script filenames
 script_list = {}
