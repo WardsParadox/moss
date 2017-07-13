@@ -25,9 +25,6 @@ from definitions import script_list
 profileuuid = str(uuid4())
 payloaduuid = str(uuid4())
 
-
-userisdone = False
-
 # Actual Content (ridiculous number of nested dicts)
 
 _content = []
@@ -43,7 +40,6 @@ _forced = {}
 _forcedcontent.append(_mcxcontent)
 _forced["Forced"] = _forcedcontent
 _payloadcontent["com.github.ygini.hello-it"] = _forced
-
 
 # Payload Content
 _payload = {}
@@ -66,52 +62,19 @@ _profile["PayloadUUID"] = profileuuid
 _profile["PayloadVersion"] = 1
 _profile["PayloadContent"] = [_payload]
 
-
-
-
-
-# Dictionaries for public functions
-# public.script.item
-
-_script_item = {}
-_script_dict = {}
-_script_settings = {}
-_script_freq = {}
-_script_item["functionIdentifier"] = "public.script.item"
-_script_item["settings"] = _script_dict
-_script_dict["script"] = _script_settings
-#_script_settings["script_name"] = script_list
-_script_settings["title"] = "$script_list"
-_script_settings["script_freq"] = _script_freq
-_script_freq["run"] = "periodic_run"
-_script_freq["time_int"] = int()
-
 def createScriptItem():
     print "Feature in development..."
-
 # public.submenu
-
-#def createSubmenuItem():
-#    titletext = raw_input("Enter the text for the Title Element:")
-#    _public_submenu = {}
-#    _submenu_settings = {}
-#    _submenu_settings["title"] = titletext
-#    _public_submenu["functionIdentifier"] = "public.submenu"
-#    _public_submenu["settings"] = _submenu_settings
-#    print "Added {0} Submenu Title to layout".format(_public_submenu["settings"]["title"])
-#    print _content
-#    _content.append(_public_submenu)
-#    print _content
-#oldcontent
-#_public_submenu = {}
-#_submenu_settings = {}
-#_submenu_settings["content"] = [] # Each list item is a dict
-#_submenu_settings["title"] = ""
-#_public_submenu["functionIdentifier"] = "public.submenu"
-#_public_submenu["settings"] = _submenu_settings
 
 def createSubmenuItem():
     print "Feature in development..."
+    _public_submenu = {}
+    _public_submenu["functionIdentifier"] = "public.submenu"
+    _public_submenu["settings"] = {}
+    _public_submenu["settings"]["title"] = raw_input("Enter Title: ")
+    _public_submenu["settings"]["content"] = addToLayout()
+    print "Added submenu with title {0}".format(_public_submenu["settings"]["title"])
+    return _public_submenu
 
 # public.open.resource
 def createOpenResource():
@@ -132,9 +95,10 @@ def createSeparator():
     return _public_separator
 
 # public.quit
-
-_public_quit = {}
-_public_quit["functionIdentifier"] = "public.quit"
+def createQuit():
+    _public_quit = {}
+    _public_quit["functionIdentifier"] = "public.quit"
+    return _public_quit
 
 def createTestHTTP():
     _public_test_http = {}
@@ -159,7 +123,7 @@ def createTitleItem():
     _public_title["functionIdentifier"] = "public.title"
     _public_title["settings"] = _public_title_settings
     print "Added {0} Title to layout".format(_public_title["settings"]["title"])
-    return _public_title
+    _content.insert(0, _public_title)
 
 # layout function
 def createLayoutItem():
@@ -167,22 +131,39 @@ def createLayoutItem():
          [1] internet test
          [2] open resource
          [3] script item
-         [4] menu separator
+         [4] separator
          [5] submenu
-         [6] title item"""
+         """
     layout_input = raw_input("> ")
-    if layout_input == '1' or layout_input.lower().startswith('i'):
-        createTestHTTP()
-    elif layout_input == '2' or layout_input.lower().startswith('o'):
-        createOpenResource()
-    elif layout_input == '3' or layout_input.lower().startswith('s'):
-        createScriptItem()
-    elif layout_input == '4' or layout_input.lower().startswith('m'):
-        createSeparator()
-    elif layout_input == '5' or layout_input.lower().startswith('t'):
-        createTitleItem()
+    if layout_input == '1' or layout_input.lower().startswith('internet'):
+        return createTestHTTP()
+    elif layout_input == '2' or layout_input.lower().startswith('open'):
+        return createOpenResource()
+    elif layout_input == '3' or layout_input.lower().startswith('script'):
+        return createScriptItem()
+    elif layout_input == '4' or layout_input.lower().startswith('seperator'):
+        return createSeparator()
+    elif layout_input == '5' or layout_input.lower().startswith('submenu'):
+        return createSubmenuItem()
     else:
-        createTitleItem()
+        print "No item selected"
+        return
+
+def addToLayout():
+    userisdone = False
+    layout = []
+    while userisdone != True:
+        print "Current Layout:"
+        pprint.pprint(layout, indent=4)
+        askanswer = raw_input('Add more to the layout? [y/n] : ')
+        if askanswer.lower().startswith('y'):
+            userisdone = False
+            layout.append(createLayoutItem())
+        else:
+            userisdone = True
+    return layout
+
+
 
 print """MOSS is a command-line application for generating mobileconfig
 files for use with the Hello IT app by @ygini
@@ -212,19 +193,12 @@ https://github.com/ygini/Hello-IT/wiki/Preferences#menu-bar-look"""
 answer = raw_input("[y/n] : ")
 if answer.lower().startswith('y'):
     createTitleItem()
-while userisdone != True:
-    print "Current Layout:"
-    pprint.pprint(_content, indent=4)
-    answer = raw_input('Add more to the layout? [y/n] : ')
-    if answer.lower().startswith('y'):
-        userisdone = False
-        createLayoutItem()
-    else:
-        userisdone = True
+    additionalContent = addToLayout()
+    for layoutItem in additionalContent:
+        _content.append(layoutItem)
+
 answer = raw_input("Would you like a quit option for your layout? [y/n] : ")
 if answer.lower().startswith('y'):
     print "Added Quit Function, Goodbye!"
-    _content.append(_public_quit)
-
-
+    _content.append(createQuit())
 writePlist(_profile, "test.mobileconfig")
