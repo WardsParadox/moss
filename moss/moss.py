@@ -129,7 +129,7 @@ def createSeparator():
     _public_separator = {}
     _public_separator["functionIdentifier"] = "public.separator"
     print "Added Menu Separator"
-    _content.append(_public_separator)
+    return _public_separator
 
 # public.quit
 
@@ -159,7 +159,7 @@ def createTitleItem():
     _public_title["functionIdentifier"] = "public.title"
     _public_title["settings"] = _public_title_settings
     print "Added {0} Title to layout".format(_public_title["settings"]["title"])
-    _content.append(_public_title)
+    return _public_title
 
 # layout function
 def createLayoutItem():
