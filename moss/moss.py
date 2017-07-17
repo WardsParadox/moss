@@ -24,14 +24,55 @@ from definitions import script_list
 version = "1.0.0"
 _content = []
 
+def createCustomScriptItem():
+    '''
+        Creates a script item with custom info.
+    '''
+    print "Please review the settings mentioned here before continuing:\
+     https://github.com/ygini/Hello-IT/wiki/public.script.item"
+    _custom_script_item = {}
+    _custom_script_item["functionIdentifier"] = "public.script.item"
+    _custom_script_item["settings"] = {}
+    _custom_script_item["settings"]["title"] = raw_input("Title: ")
+    scriptpath_answer = raw_input("Is the script located in the CustomScript's folder? [y/n] : ")
+    if scriptpath_answer.lower().startswith('y'):
+        _custom_script_item["settings"]["script"] = \
+        raw_input("Full name of Script (extension included): ")
+    else:
+        _custom_script_item["settings"]["path"] = raw_input("Full Path to Script: ")
+    scriptrepeat_answer = raw_input("Add a repeat setting?\n[y/n] : ")
+    if scriptrepeat_answer.lower().startswith('y'):
+        while True:
+            try:
+                _custom_script_item["settings"]["repeat"] = \
+                int(raw_input("How often should it repeat in seconds?: "))
+                break
+            except TypeError:
+                pass
+    scriptperiodic_answer = raw_input("Add a periodic-run setting?\n[y/n] : ")
+    if scriptperiodic_answer.lower().startswith('y'):
+        while True:
+            try:
+                _custom_script_item["settings"]["periodic-run"] = \
+                int(raw_input("How often should it periodically run in seconds?: "))
+                break
+            except TypeError:
+                pass
+    print "Added Custom Script Item."
+    return _custom_script_item
+
 def createScriptItem():
     '''
     Creates a script item based on selection in definitions.py
     '''
     for key in sorted(script_list.keys()):
         print key
+    print "Custom Script"
     scriptanswer = raw_input("Which script item would you like to add?"\
-    "Type exactly as seen above!\n[y/n] > ")
+    "Type exactly as seen above!\n")
+    if scriptanswer.lower().startswith("custom"):
+        _public_script_item = createCustomScriptItem()
+        return _public_script_item
     _public_script_item = {}
     _public_script_item["functionIdentifier"] = "public.script.item"
     _public_script_item["settings"] = {}

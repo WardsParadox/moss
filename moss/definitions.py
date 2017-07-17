@@ -95,4 +95,24 @@ mac_address_info["settings"]["title"] = "macaddress"
 mac_address_info["settings"]["periodic-run"] = 180
 script_list["MAC Address Info"] = mac_address_info
 
+ip_address_info = {}
+ip_address_info["settings"] = {}
+ip_address_info["settings"]["script"] = "com.github.ygini.hello-it.ip.sh"
+ip_address_info["settings"]["title"] = "ip_address"
+ip_address_info["settings"]["periodic-run"] = 600
+ip_address_info["settings"]["repeat"] = 30
+script_list["IP Address Info"] = ip_address_info
+
+hostname_info = {}
+hostname_info["settings"] = {}
+hostname_info["settings"]["script"] = "com.github.ygini.hello-it.hostname.sh"
+hostname_info["settings"]["title"] = "hostname_info"
+script_list["Hostname Info"] = hostname_info
+
+hide_desktop_info = {}
+hide_desktop_info["settings"] = {}
+hide_desktop_info["settings"]["script"] = "com.github.ygini.hello-it.hide-desktop.sh"
+hide_desktop_info["settings"]["title"] = "Hide Desktop"
+script_list["Hide Desktop Info"] = hide_desktop_info
+
 keyslist = sorted(script_list.keys())
