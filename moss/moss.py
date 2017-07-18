@@ -174,6 +174,7 @@ def createLayoutItem():
          [3] script item
          [4] separator
          [5] submenu
+         [6] title item
          """
     layout_input = raw_input("> ")
     if layout_input == '1' or layout_input.lower().startswith('internet'):
@@ -186,6 +187,8 @@ def createLayoutItem():
         return createSeparator()
     elif layout_input == '5' or layout_input.lower().startswith('submenu'):
         return createSubmenuItem()
+    elif layout_input == '6' or layout_input.lower().startswith("title"):
+        return createTitleItem()
     else:
         print "No item selected"
         return
