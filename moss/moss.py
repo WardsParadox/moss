@@ -169,12 +169,13 @@ def createLayoutItem():
     Starts the whole layout process.
     '''
     print """What layout item would you like to add?
-         [1] internet test
-         [2] open resource
-         [3] script item
-         [4] separator
-         [5] submenu
-         [6] title item
+         [1] Internet Test
+         [2] Open Resource
+         [3] Script Item
+         [4] Separator
+         [5] Submenu
+         [6] Title Item
+         [7] Delete Previous
          """
     layout_input = raw_input("> ")
     if layout_input == '1' or layout_input.lower().startswith('internet'):
@@ -189,6 +190,8 @@ def createLayoutItem():
         layoutitem = createSubmenuItem()
     elif layout_input == '6' or layout_input.lower().startswith("title"):
         layoutitem = createTitleItem()
+    elif layout_input == '7' or layout_input.lower().startswith("delete"):
+        return "delete previous"
     else:
         print "No item selected"
         return
@@ -206,7 +209,15 @@ def addToLayout():
         askanswer = raw_input('Add more to the layout? [y/n] : ')
         if askanswer.lower().startswith('y'):
             userisdone = False
-            layout.append(createLayoutItem())
+            item = createLayoutItem()
+            if item == "delete previous":
+                print "Deleting previous item"
+                try:
+                    layout.pop()
+                except IndexError:
+                    print "No items to delete!"
+            else:
+                layout.append(item)
         else:
             userisdone = True
     return layout
