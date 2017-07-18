@@ -23,6 +23,7 @@ from definitions import script_list, keyslist
 
 version = "1.0.0"
 _content = []
+keyslist.append("Custom Script")
 
 def createCustomScriptItem():
     '''
@@ -65,7 +66,6 @@ def createScriptItem():
     '''
     Creates a script item based on selection in definitions.py
     '''
-    keyslist.append("Custom Script")
     for key in keyslist:
         print key
     _public_script_item = {}
@@ -305,7 +305,8 @@ def main():
     https://github.com/ygini/Hello-IT/wiki/Preferences#menu-bar-look"""
     answer = raw_input("[y/n] : ")
     if answer.lower().startswith('y'):
-        _content.insert(0, createTitleItem())
+        _mcxcontent["mcx_preference_settings"]["title"] = \
+        raw_input("Enter the text for the Menu Bar Title: ")
     additionalContent = addToLayout()
     for layoutItem in additionalContent:
         _content.append(layoutItem)
