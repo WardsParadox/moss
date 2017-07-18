@@ -68,15 +68,22 @@ def createScriptItem():
     for key in sorted(script_list.keys()):
         print key
     print "Custom Script"
-    scriptanswer = raw_input("Which script item would you like to add?"\
-    "Type exactly as seen above!\n")
-    if scriptanswer.lower().startswith("custom"):
-        _public_script_item = createCustomScriptItem()
-        return _public_script_item
     _public_script_item = {}
     _public_script_item["functionIdentifier"] = "public.script.item"
     _public_script_item["settings"] = {}
-    _public_script_item["settings"] = script_list[scriptanswer]["settings"]
+    while True:
+        scriptanswer = raw_input("Which script item would you like to add?"\
+        "Type exactly as seen above!\n")
+        try:
+            if scriptanswer.lower().startswith("custom"):
+                _public_script_item = createCustomScriptItem()
+                return _public_script_item
+            else:
+                _public_script_item["settings"] = script_list[scriptanswer]["settings"]
+            break
+        except KeyError:
+            print "Error: Script choice not found, please enter it again"
+
     print "Added Script Item: {0}".format(scriptanswer)
     return _public_script_item
 
@@ -191,7 +198,7 @@ def addToLayout():
     layout = []
     while userisdone != True:
         print "Current Layout:"
-        pprint.pprint(layout, indent=4)
+        pprint.pprint(layout, indent=4, depth=3)
         askanswer = raw_input('Add more to the layout? [y/n] : ')
         if askanswer.lower().startswith('y'):
             userisdone = False
