@@ -19,7 +19,7 @@ import pprint
 import argparse
 from plistlib import writePlist
 from uuid import uuid4
-from definitions import script_list
+from definitions import script_list, keyslist
 
 version = "1.0.0"
 _content = []
@@ -65,9 +65,9 @@ def createScriptItem():
     '''
     Creates a script item based on selection in definitions.py
     '''
-    for key in sorted(script_list.keys()):
+    keyslist.append("Custom Script")
+    for key in keyslist:
         print key
-    print "Custom Script"
     _public_script_item = {}
     _public_script_item["functionIdentifier"] = "public.script.item"
     _public_script_item["settings"] = {}
@@ -161,7 +161,7 @@ def createTitleItem():
     _public_title["functionIdentifier"] = "public.title"
     _public_title["settings"] = _public_title_settings
     print "Added {0} Title to layout".format(_public_title["settings"]["title"])
-    _content.insert(0, _public_title)
+    return _public_title
 
 # layout function
 def createLayoutItem():
@@ -178,20 +178,21 @@ def createLayoutItem():
          """
     layout_input = raw_input("> ")
     if layout_input == '1' or layout_input.lower().startswith('internet'):
-        return createTestHTTP()
+        layoutitem = createTestHTTP()
     elif layout_input == '2' or layout_input.lower().startswith('open'):
-        return createOpenResource()
+        layoutitem = createOpenResource()
     elif layout_input == '3' or layout_input.lower().startswith('script'):
-        return createScriptItem()
+        layoutitem = createScriptItem()
     elif layout_input == '4' or layout_input.lower().startswith('seperator'):
-        return createSeparator()
+        layoutitem = createSeparator()
     elif layout_input == '5' or layout_input.lower().startswith('submenu'):
-        return createSubmenuItem()
+        layoutitem = createSubmenuItem()
     elif layout_input == '6' or layout_input.lower().startswith("title"):
-        return createTitleItem()
+        layoutitem = createTitleItem()
     else:
         print "No item selected"
         return
+    return layoutitem
 
 def addToLayout():
     '''
@@ -304,7 +305,7 @@ def main():
     https://github.com/ygini/Hello-IT/wiki/Preferences#menu-bar-look"""
     answer = raw_input("[y/n] : ")
     if answer.lower().startswith('y'):
-        createTitleItem()
+        _content.insert(0, createTitleItem())
     additionalContent = addToLayout()
     for layoutItem in additionalContent:
         _content.append(layoutItem)
