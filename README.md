@@ -21,8 +21,8 @@
 # License
 
 MOSS is a command-line application for generating mobileconfig
-files for use with the Hello IT app by @ygini
-Copyright (C) 2017  Vince Mascoli (@paperfixie) & Zack McCauley (@wardsparadox)
+files for use with the [Hello IT](https://github.com/ygini/Hello-IT) app by [@ygini](https://www.github.com/ygini)
+Copyright (C) 2017  Vince Mascoli [@paperfixie](https://www.github.com/paperfixie) & Zack McCauley [@wardsparadox](https://www.github.com/wardsparadox)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
