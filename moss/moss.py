@@ -25,6 +25,7 @@ version = "1.0.0"
 _content = []
 keyslist.append("Custom Script")
 
+# public.script.item
 def createCustomScriptItem():
     '''
         Creates a script item with custom info.
@@ -72,8 +73,8 @@ def createScriptItem():
     _public_script_item["functionIdentifier"] = "public.script.item"
     _public_script_item["settings"] = {}
     while True:
-        scriptanswer = raw_input("Which script item would you like to add?"\
-        "Type exactly as seen above!\n")
+        scriptanswer = raw_input("Which script item would you like to add? "\
+        "[Type exactly as seen above!]\n> ")
         try:
             if scriptanswer.lower().startswith("custom"):
                 _public_script_item = createCustomScriptItem()
@@ -87,6 +88,7 @@ def createScriptItem():
     print "Added Script Item: {0}".format(scriptanswer)
     return _public_script_item
 
+# public.submenu
 def createSubmenuItem():
     '''
     Creates a submenu and loops through addToLayout
@@ -255,7 +257,7 @@ def main():
     '''
     parser = argparse.ArgumentParser(
         description="""MOSS is a command-line application for generating mobileconfig
-        files for use with the Hello IT app by @ygini
+        files for use with the Hello IT app by Yoann Gini (@ygini)
         Copyright (C) 2017  Vince Mascoli (@paperfixie) & Zack McCauley (@wardsparadox)""")
     parser.add_argument(
         '--profileuuid',
