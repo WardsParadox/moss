@@ -1,0 +1,6 @@
+*.mobileconfig
+*.pyc
+*.DS_*
+build/*
+dist/*
+*.spec
