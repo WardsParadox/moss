@@ -32,7 +32,7 @@ from plistlib import writePlist
 from uuid import uuid4
 from definitions import script_list, keyslist
 
-version = "1.0.0"
+version = "1.1.0"
 _content = []
 keyslist.append("Custom Script")
 
