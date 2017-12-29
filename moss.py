@@ -32,7 +32,7 @@ from plistlib import writePlist
 from uuid import uuid4
 from definitions import script_list, keyslist
 
-version = "1.0.0"
+version = "1.0.1"
 _content = []
 keyslist.append("Custom Script")
 
@@ -300,7 +300,10 @@ def main():
     _mcxcontent = {}
     _contentarray = {}
     _contentarray["content"] = _content
-    _mcxcontent["mcx_preference_settings"] = _contentarray
+    _containermenu = {}
+    _containermenu["functionIdentifier"] = "public.submenu"
+    _containermenu["settings"] = _contentarray
+    _mcxcontent["mcx_preference_settings"] = _containermenu
     _forced = {}
     _forcedcontent.append(_mcxcontent)
     _forced["Forced"] = _forcedcontent
