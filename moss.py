@@ -32,9 +32,10 @@ from plistlib import writePlist
 from uuid import uuid4
 from definitions import script_list, keyslist
 
-version = "1.0.1"
+version = "1.2.1"
 _content = []
 keyslist.append("Custom Script")
+
 
 # public.script.item
 def createCustomScriptItem():
@@ -50,7 +51,7 @@ def createCustomScriptItem():
     scriptpath_answer = raw_input("Is the script located in the CustomScript's folder? [y/n] : ")
     if scriptpath_answer.lower().startswith('y'):
         _custom_script_item["settings"]["script"] = \
-        raw_input("Full name of Script (extension included): ")
+            raw_input("Full name of Script (extension included): ")
     else:
         _custom_script_item["settings"]["path"] = raw_input("Full Path to Script: ")
     scriptrepeat_answer = raw_input("Add a repeat setting?\n[y/n] : ")
@@ -58,7 +59,7 @@ def createCustomScriptItem():
         while True:
             try:
                 _custom_script_item["settings"]["repeat"] = \
-                int(raw_input("How often should it repeat in seconds?: "))
+                    int(raw_input("How often should it repeat in seconds?: "))
                 break
             except TypeError:
                 pass
@@ -67,12 +68,13 @@ def createCustomScriptItem():
         while True:
             try:
                 _custom_script_item["settings"]["periodic-run"] = \
-                int(raw_input("How often should it periodically run in seconds?: "))
+                    int(raw_input("How often should it periodically run in seconds?: "))
                 break
             except TypeError:
                 pass
     print "Added Custom Script Item."
     return _custom_script_item
+
 
 def createScriptItem():
     '''
@@ -84,8 +86,8 @@ def createScriptItem():
     _public_script_item["functionIdentifier"] = "public.script.item"
     _public_script_item["settings"] = {}
     while True:
-        scriptanswer = raw_input("Which script item would you like to add? "\
-        "[Type exactly as seen above!]\n> ")
+        scriptanswer = raw_input("Which script item would you like to add? "
+                                    "[Type exactly as seen above!]\n> ")
         try:
             if scriptanswer.lower().startswith("custom"):
                 _public_script_item = createCustomScriptItem()
@@ -98,6 +100,7 @@ def createScriptItem():
 
     print "Added Script Item: {0}".format(scriptanswer)
     return _public_script_item
+
 
 # public.submenu
 def createSubmenuItem():
@@ -112,6 +115,7 @@ def createSubmenuItem():
     print "Added submenu with title {0}".format(_public_submenu["settings"]["title"])
     return _public_submenu
 
+
 # public.open.resource
 def createOpenResource():
     '''
@@ -125,6 +129,7 @@ def createOpenResource():
     print "Added \"Open Resource\" Item: {0}".format(_public_open_resource["settings"]["title"])
     return _public_open_resource
 
+
 # public.separator
 def createSeparator():
     '''
@@ -135,6 +140,7 @@ def createSeparator():
     print "Added Menu Separator"
     return _public_separator
 
+
 # public.quit
 def createQuit():
     '''
@@ -143,6 +149,7 @@ def createQuit():
     _public_quit = {}
     _public_quit["functionIdentifier"] = "public.quit"
     return _public_quit
+
 
 def createTestHTTP():
     '''
@@ -294,26 +301,17 @@ def main():
         printVersion()
         exit(0)
     payloaduuid = str(uuid4())
-    # MCX Content
-    _payloadcontent = {}
-    _forcedcontent = []
-    _mcxcontent = {}
+    _payload = {}
     _contentarray = {}
     _contentarray["content"] = _content
     _containermenu = {}
     _containermenu["functionIdentifier"] = "public.submenu"
-    _containermenu["settings"] = _contentarray
-    _mcxcontent["mcx_preference_settings"] = _containermenu
-    _forced = {}
-    _forcedcontent.append(_mcxcontent)
-    _forced["Forced"] = _forcedcontent
-    _payloadcontent["com.github.ygini.hello-it"] = _forced
+    _payload["settings"] = _contentarray
     # Payload Content
-    _payload = {}
-    _payload["PayloadContent"] = _payloadcontent
     _payload["PayloadEnabled"] = True
-    _payload["PayloadIdentifier"] = "{0}.configuration.{1}".format(args.identifier, payloaduuid)
-    _payload["PayloadType"] = "com.apple.ManagedClient.preferences"
+    _payload["PayloadIdentifier"] = "{0}.configuration.{1}".format(
+                                    args.identifier, payloaduuid)
+    _payload["PayloadType"] = "com.github.ygini.hello-it"
     _payload["PayloadUUID"] = payloaduuid
     _payload["PayloadVersion"] = 1
     # Profile info
@@ -333,7 +331,7 @@ def main():
     answer = raw_input("[y/n] : ")
     if answer.lower().startswith('y'):
         _mcxcontent["mcx_preference_settings"]["title"] = \
-        raw_input("Enter the text for the Menu Bar Title: ")
+            raw_input("Enter the text for the Menu Bar Title: ")
     additionalContent = addToLayout()
     for layoutItem in additionalContent:
         _content.append(layoutItem)
@@ -341,9 +339,10 @@ def main():
     if answer.lower().startswith('y'):
         print "Added Quit Function, Goodbye!"
         _content.append(createQuit())
-    print "Writing out configuration as"\
-    "HelloITConfiguration.mobileconfig in current working directory."
+    print "Writing out configuration as "\
+        "HelloITConfiguration.mobileconfig in current working directory."
     writePlist(_profile, "HelloITConfiguration.mobileconfig")
+
 
 if __name__ == '__main__':
     main()
