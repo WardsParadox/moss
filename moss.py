@@ -330,7 +330,7 @@ def main():
     https://github.com/ygini/Hello-IT/wiki/Preferences#menu-bar-look"""
     answer = raw_input("[y/n] : ")
     if answer.lower().startswith('y'):
-        _mcxcontent["mcx_preference_settings"]["title"] = \
+        _payload["settings"]["title"] = \
             raw_input("Enter the text for the Menu Bar Title: ")
     additionalContent = addToLayout()
     for layoutItem in additionalContent:
